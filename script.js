@@ -1,62 +1,46 @@
 const pantalla = document.getElementById("pantalla");
 
 const inicio = document.getElementById("inicio");
-
 const segundo = document.getElementById("segundo");
-
 const ramito = document.getElementById("ramito");
-
 const mensajeFinal = document.getElementById("final");
-
 const petalosCaidos = document.getElementById("petalos-caidos");
-
 
 let activado = false;
 
 
-/* =========================
-   CUANDO TOCA LA PANTALLA
-========================= */
-
 pantalla.addEventListener("click", () => {
 
-    if (activado) {
-        return;
-    }
+    if (activado) return;
 
     activado = true;
 
 
-    /* Ocultamos el primer mensaje */
+    // Desaparece el primer mensaje
 
-    inicio.style.opacity = "0";
-
-    inicio.style.transform = "translateY(-20px)";
+    inicio.classList.add("ocultar");
 
 
-    /* Aparece el segundo mensaje */
+    // Aparece "Un pequeño gesto..."
 
     setTimeout(() => {
 
-        segundo.style.opacity = "1";
+        segundo.classList.add("mostrar");
 
-        segundo.style.transform = "translateY(0)";
-
-    }, 900);
+    }, 800);
 
 
-    /* Desaparece el segundo mensaje */
+    // Desaparece el segundo mensaje
 
     setTimeout(() => {
 
-        segundo.style.opacity = "0";
-
-        segundo.style.transform = "translateY(-20px)";
+        segundo.classList.remove("mostrar");
+        segundo.classList.add("ocultar");
 
     }, 2500);
 
 
-    /* Aparece el ramito */
+    // Aparece el ramito
 
     setTimeout(() => {
 
@@ -64,43 +48,38 @@ pantalla.addEventListener("click", () => {
 
         crearPetalos();
 
-    }, 2800);
+    }, 2700);
 
 
-    /* Aparece el mensaje final */
+    // Mensaje final
 
     setTimeout(() => {
 
         mensajeFinal.classList.add("mostrar");
 
-    }, 5000);
+    }, 5100);
 
 });
 
 
-/* =========================
-   PÉTALOS QUE CAEN
-========================= */
-
 function crearPetalos() {
 
-    for (let i = 0; i < 18; i++) {
+    for (let i = 0; i < 12; i++) {
 
-        const petalo = document.createElement("div");
+        const petalo = document.createElement("span");
 
-        petalo.classList.add("petalo-caido");
+        petalo.className = "petalo-caido";
 
         petalo.style.left =
-            Math.random() * 100 + "%";
+            (35 + Math.random() * 30) + "%";
 
         petalo.style.animationDelay =
-            Math.random() * 3 + "s";
+            (Math.random() * 2) + "s";
 
         petalo.style.animationDuration =
-            (4 + Math.random() * 3) + "s";
+            (4 + Math.random() * 2) + "s";
 
         petalosCaidos.appendChild(petalo);
-
     }
 
 }
