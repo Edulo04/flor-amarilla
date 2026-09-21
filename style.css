@@ -19,7 +19,7 @@ body {
 
     background:
         radial-gradient(
-            circle at 50% 42%,
+            circle at 50% 40%,
             #30291e 0%,
             #18140f 58%,
             #090807 100%
@@ -200,20 +200,26 @@ body {
     position: absolute;
 
     width: min(
-        400px,
-        88vw
+        380px,
+        86vw
     );
 
     height: min(
-        520px,
-        72vh
+        450px,
+        65vh
     );
 
     left: 50%;
+
+    /*
+       Lo subimos para dejar espacio
+       al mensaje final.
+    */
+
     top: 50%;
 
     transform:
-        translate(-50%, -47%);
+        translate(-50%, -61%);
 
     opacity: 0;
 
@@ -255,18 +261,18 @@ body {
 
 
 /* ==================================================
-   LUZ
+   LUZ SUAVE
 ================================================== */
 
 .ramito-brillo {
 
     position: absolute;
 
-    width: 260px;
-    height: 260px;
+    width: 270px;
+    height: 270px;
 
     left: 50%;
-    top: 100px;
+    top: 70px;
 
     transform:
         translateX(-50%);
@@ -276,11 +282,16 @@ body {
     background:
         radial-gradient(
             circle,
-            rgba(255, 215, 70, .10),
+            rgba(
+                255,
+                215,
+                70,
+                .11
+            ),
             transparent 70%
         );
 
-    filter: blur(15px);
+    filter: blur(16px);
 
     opacity: 0;
 
@@ -304,15 +315,20 @@ body {
 
     fill: none;
 
-    stroke: #416f36;
+    stroke:
+        #416f36;
 
-    stroke-width: 7;
+    stroke-width:
+        7;
 
-    stroke-linecap: round;
+    stroke-linecap:
+        round;
 
-    stroke-dasharray: 400;
+    stroke-dasharray:
+        400;
 
-    stroke-dashoffset: 400;
+    stroke-dashoffset:
+        400;
 
     opacity: 0;
 
@@ -322,7 +338,8 @@ body {
 }
 
 
-.ramito.mostrar .tallos .tallo {
+.ramito.mostrar
+.tallos .tallo {
 
     opacity: 1;
 
@@ -336,20 +353,25 @@ body {
 
 .hojas .hoja {
 
-    fill: #4d783d;
+    fill:
+        #4d783d;
 
     opacity: 0;
 
-    transform-box: fill-box;
+    transform-box:
+        fill-box;
 
-    transform-origin: center;
+    transform-origin:
+        center;
 
     transition:
         opacity .8s ease 1.1s;
 }
 
 
-.ramito.mostrar .hojas .hoja {
+.ramito.mostrar
+.hojas .hoja {
+
     opacity: 1;
 }
 
@@ -358,40 +380,39 @@ body {
    GIRASOLES
 ================================================== */
 
-/*
-   IMPORTANTE:
-   No usamos transform en los grupos completos.
-   El SVG ya tiene las posiciones definidas
-   mediante translate().
-*/
-
 .girasol {
 
     opacity: 0;
 
-    transform-origin: center;
+    transform-origin:
+        center;
 
     transition:
         opacity 1s ease;
 }
 
 
-/* Cada flor aparece en un momento diferente */
-
 .girasol-izquierdo {
-    transition-delay: .8s;
+    transition-delay:
+        .8s;
 }
+
 
 .girasol-centro {
-    transition-delay: .55s;
+    transition-delay:
+        .55s;
 }
+
 
 .girasol-derecho {
-    transition-delay: 1s;
+    transition-delay:
+        1s;
 }
 
 
-.ramito.mostrar .girasol {
+.ramito.mostrar
+.girasol {
+
     opacity: 1;
 }
 
@@ -402,22 +423,30 @@ body {
 
 .petalos ellipse {
 
-    fill: #f6c72f;
+    fill:
+        #f6c72f;
 
-    stroke: #e6b21e;
+    stroke:
+        #e6b21e;
 
-    stroke-width: 1;
+    stroke-width:
+        1;
 
     filter:
         drop-shadow(
             0 2px 2px
-            rgba(0, 0, 0, .18)
+            rgba(
+                0,
+                0,
+                0,
+                .18
+            )
         );
 }
 
 
 /* ==================================================
-   CENTRO DE LOS GIRASOLES
+   CENTRO
 ================================================== */
 
 .centro {
@@ -434,7 +463,12 @@ body {
     filter:
         drop-shadow(
             0 2px 3px
-            rgba(0, 0, 0, .3)
+            rgba(
+                0,
+                0,
+                0,
+                .3
+            )
         );
 }
 
@@ -452,16 +486,29 @@ body {
 
     transition:
         opacity 1s ease 1.7s;
+
+    filter:
+        drop-shadow(
+            0 5px 7px
+            rgba(
+                0,
+                0,
+                0,
+                .20
+            )
+        );
 }
 
 
-.ramito.mostrar .envoltorio {
+.ramito.mostrar
+.envoltorio {
+
     opacity: 1;
 }
 
 
 /* ==================================================
-   DOBLEZ DEL PAPEL
+   DOBLEZ
 ================================================== */
 
 .doblez {
@@ -469,7 +516,12 @@ body {
     fill: none;
 
     stroke:
-        rgba(100, 72, 32, .35);
+        rgba(
+            100,
+            72,
+            32,
+            .35
+        );
 
     stroke-width:
         2;
@@ -481,7 +533,9 @@ body {
 }
 
 
-.ramito.mostrar .doblez {
+.ramito.mostrar
+.doblez {
+
     opacity: 1;
 }
 
@@ -513,7 +567,9 @@ body {
 }
 
 
-.ramito.mostrar .cinta {
+.ramito.mostrar
+.cinta {
+
     opacity: 1;
 }
 
@@ -530,7 +586,12 @@ body {
 
     left: 0;
 
-    bottom: 7%;
+    /*
+       Lo dejamos bien abajo,
+       separado del ramito.
+    */
+
+    bottom: 4.5%;
 
     text-align: center;
 
@@ -561,12 +622,13 @@ body {
 .mensaje-final h2 {
 
     font-size: clamp(
-        30px,
-        7vw,
-        46px
+        28px,
+        6vw,
+        42px
     );
 
-    font-weight: normal;
+    font-weight:
+        normal;
 
     color:
         #ffe99a;
@@ -584,20 +646,23 @@ body {
 
 .mensaje-final p {
 
-    margin-top: 10px;
+    margin-top:
+        8px;
 
     font-family:
         Arial,
         sans-serif;
 
-    font-size: 14px;
+    font-size:
+        13px;
 
-    opacity: .55;
+    opacity:
+        .55;
 }
 
 
 /* ==================================================
-   PÉTALOS QUE CAEN
+   PÉTALOS
 ================================================== */
 
 #petalos-caidos {
@@ -649,12 +714,14 @@ body {
 
     15% {
 
-        opacity: .65;
+        opacity:
+            .65;
     }
 
     100% {
 
-        opacity: 0;
+        opacity:
+            0;
 
         transform:
             translateY(105vh)
@@ -671,12 +738,23 @@ body {
 
     .ramito {
 
-        width: 360px;
+        width:
+            min(
+                350px,
+                88vw
+            );
 
-        height: 470px;
+        height:
+            min(
+                420px,
+                61vh
+            );
 
         transform:
-            translate(-50%, -46%);
+            translate(
+                -50%,
+                -62%
+            );
     }
 
 
@@ -692,7 +770,8 @@ body {
 
     .mensaje-final {
 
-        bottom: 6%;
+        bottom:
+            5%;
     }
 
 }
