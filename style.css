@@ -1,0 +1,702 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+    font-family: Georgia, serif;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #332d21 0%,
+            #17140f 55%,
+            #0c0b09 100%
+        );
+
+    color: #fff;
+
+    user-select: none;
+}
+
+
+/* =========================
+   PANTALLA PRINCIPAL
+========================= */
+
+#pantalla {
+    width: 100%;
+    height: 100vh;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   MENSAJES
+========================= */
+
+.pantalla {
+    position: absolute;
+
+    width: 100%;
+
+    text-align: center;
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+}
+
+
+.mensaje-inicial {
+    z-index: 10;
+}
+
+
+.mensaje-inicial h1 {
+    font-size: clamp(30px, 7vw, 52px);
+
+    font-weight: normal;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 22px;
+}
+
+
+.mensaje-inicial p {
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    opacity: 0.65;
+
+    animation: respirar 2s infinite;
+}
+
+
+@keyframes respirar {
+
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* SEGUNDO MENSAJE */
+
+.mensaje-segundo {
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    pointer-events: none;
+
+    z-index: 8;
+}
+
+
+.mensaje-segundo h2 {
+    font-size: clamp(28px, 7vw, 48px);
+
+    font-weight: normal;
+
+    font-style: italic;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================
+   RAMITO
+========================= */
+
+.ramito {
+    position: absolute;
+
+    width: 330px;
+    height: 430px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -42%)
+        scale(0);
+
+    opacity: 0;
+
+    transition:
+        transform 2s cubic-bezier(.17, .67, .3, 1.25),
+        opacity 1.5s ease;
+
+    z-index: 5;
+}
+
+
+.ramito.mostrar {
+    opacity: 1;
+
+    transform:
+        translate(-50%, -42%)
+        scale(1);
+}
+
+
+/* =========================
+   FLORES
+========================= */
+
+.flores {
+    position: absolute;
+
+    width: 100%;
+    height: 250px;
+
+    top: 20px;
+
+    left: 0;
+}
+
+
+/* Cada girasol */
+
+.girasol {
+    position: absolute;
+
+    width: 115px;
+    height: 115px;
+
+    transform: scale(0);
+
+    transition:
+        transform 1.4s cubic-bezier(.17, .67, .3, 1.3);
+}
+
+
+.ramito.mostrar .girasol {
+    transform: scale(1);
+}
+
+
+/* posiciones */
+
+.flor-izquierda {
+    left: 28px;
+    top: 75px;
+
+    transition-delay: 0.3s;
+}
+
+
+.flor-centro {
+    left: 107px;
+    top: 10px;
+
+    transition-delay: 0.1s;
+}
+
+
+.flor-derecha {
+    right: 25px;
+    top: 72px;
+
+    transition-delay: 0.5s;
+}
+
+
+/* =========================
+   PÉTALOS
+========================= */
+
+.petalos {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    animation: girar-suave 12s linear infinite;
+}
+
+
+.petalos span {
+    position: absolute;
+
+    width: 28px;
+    height: 52px;
+
+    left: 43px;
+    top: 7px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffe45b,
+            #f5bd24
+        );
+
+    border-radius:
+        50% 50%
+        45% 45%;
+
+    transform-origin:
+        center 51px;
+
+    box-shadow:
+        0 0 8px rgba(255, 213, 50, 0.2);
+}
+
+
+/* Rotación de cada pétalo */
+
+.petalos span:nth-child(1) {
+    transform: rotate(0deg);
+}
+
+.petalos span:nth-child(2) {
+    transform: rotate(30deg);
+}
+
+.petalos span:nth-child(3) {
+    transform: rotate(60deg);
+}
+
+.petalos span:nth-child(4) {
+    transform: rotate(90deg);
+}
+
+.petalos span:nth-child(5) {
+    transform: rotate(120deg);
+}
+
+.petalos span:nth-child(6) {
+    transform: rotate(150deg);
+}
+
+.petalos span:nth-child(7) {
+    transform: rotate(180deg);
+}
+
+.petalos span:nth-child(8) {
+    transform: rotate(210deg);
+}
+
+.petalos span:nth-child(9) {
+    transform: rotate(240deg);
+}
+
+.petalos span:nth-child(10) {
+    transform: rotate(270deg);
+}
+
+.petalos span:nth-child(11) {
+    transform: rotate(300deg);
+}
+
+.petalos span:nth-child(12) {
+    transform: rotate(330deg);
+}
+
+
+@keyframes girar-suave {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================
+   CENTRO DEL GIRASOL
+========================= */
+
+.centro-flor {
+    position: absolute;
+
+    width: 48px;
+    height: 48px;
+
+    left: 33px;
+    top: 33px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #6d3d13 0%,
+            #48270e 65%,
+            #2c190a 100%
+        );
+
+    z-index: 4;
+
+    box-shadow:
+        inset 0 0 8px rgba(0, 0, 0, 0.7),
+        0 0 10px rgba(255, 194, 35, 0.25);
+}
+
+
+/* =========================
+   TALLOS
+========================= */
+
+.tallo {
+    position: absolute;
+
+    width: 8px;
+
+    background:
+        linear-gradient(
+            to right,
+            #244923,
+            #4f7939,
+            #294d25
+        );
+
+    border-radius: 10px;
+
+    transform-origin: top;
+
+    transform: scaleY(0);
+
+    transition:
+        transform 1.4s ease 1s;
+}
+
+
+.ramito.mostrar .tallo {
+    transform: scaleY(1);
+}
+
+
+.tallo-izquierdo {
+    height: 250px;
+
+    left: 82px;
+
+    top: 120px;
+
+    transform: rotate(15deg) scaleY(0);
+}
+
+
+.tallo-centro {
+    height: 280px;
+
+    left: 160px;
+
+    top: 115px;
+}
+
+
+.tallo-derecho {
+    height: 245px;
+
+    right: 83px;
+
+    top: 125px;
+
+    transform: rotate(-15deg) scaleY(0);
+}
+
+
+.ramito.mostrar .tallo-izquierdo,
+.ramito.mostrar .tallo-derecho {
+    transform: rotate(15deg) scaleY(1);
+}
+
+
+.ramito.mostrar .tallo-derecho {
+    transform: rotate(-15deg) scaleY(1);
+}
+
+
+/* =========================
+   HOJAS
+========================= */
+
+.hoja {
+    position: absolute;
+
+    width: 80px;
+    height: 34px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #315a2d,
+            #628d45
+        );
+
+    border-radius:
+        100% 0 100% 0;
+
+    opacity: 0;
+
+    transition:
+        opacity 1s ease 1.8s,
+        transform 1s ease 1.8s;
+}
+
+
+.ramito.mostrar .hoja {
+    opacity: 1;
+}
+
+
+.hoja-izquierda {
+    left: 55px;
+    top: 255px;
+
+    transform:
+        rotate(-25deg)
+        scale(0);
+}
+
+
+.hoja-centro {
+    left: 100px;
+    top: 300px;
+
+    transform:
+        rotate(25deg)
+        scale(0);
+}
+
+
+.hoja-derecha {
+    right: 50px;
+    top: 245px;
+
+    transform:
+        rotate(25deg)
+        scale(0);
+}
+
+
+.ramito.mostrar .hoja {
+    transform:
+        rotate(0deg)
+        scale(1);
+}
+
+
+/* =========================
+   ENVOLTORIO
+========================= */
+
+.envoltorio {
+    position: absolute;
+
+    width: 180px;
+    height: 115px;
+
+    left: 75px;
+    bottom: 8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c6a66b,
+            #e0c58d,
+            #b8965e
+        );
+
+    clip-path:
+        polygon(
+            5% 0%,
+            95% 0%,
+            72% 100%,
+            28% 100%
+        );
+
+    opacity: 0;
+
+    transform: translateY(25px);
+
+    transition:
+        opacity 1s ease 2s,
+        transform 1s ease 2s;
+}
+
+
+.ramito.mostrar .envoltorio {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* =========================
+   CINTA
+========================= */
+
+.cinta {
+    position: absolute;
+
+    width: 15px;
+    height: 55px;
+
+    background: #d4a82e;
+
+    left: 157px;
+    bottom: 55px;
+
+    opacity: 0;
+
+    transition:
+        opacity 1s ease 2.3s;
+}
+
+
+.ramito.mostrar .cinta {
+    opacity: 1;
+}
+
+
+/* =========================
+   MENSAJE FINAL
+========================= */
+
+.mensaje-final {
+    position: absolute;
+
+    bottom: 8%;
+
+    width: 100%;
+
+    text-align: center;
+
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease;
+
+    z-index: 10;
+}
+
+
+.mensaje-final.mostrar {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+.mensaje-final h2 {
+    font-size: clamp(28px, 7vw, 44px);
+
+    font-weight: normal;
+
+    color: #ffe98a;
+}
+
+
+.mensaje-final p {
+    margin-top: 10px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    opacity: 0.65;
+}
+
+
+/* =========================
+   PÉTALOS CAÍDOS
+========================= */
+
+.petalo-caido {
+    position: absolute;
+
+    width: 9px;
+    height: 15px;
+
+    background: #f5c72d;
+
+    border-radius: 50%;
+
+    opacity: 0;
+
+    animation:
+        caer 5s linear forwards;
+}
+
+
+@keyframes caer {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(-20px)
+            rotate(0deg);
+    }
+
+    15% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+    }
+
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 500px) {
+
+    .ramito {
+        transform:
+            translate(-50%, -42%)
+            scale(0.82);
+    }
+
+    .ramito.mostrar {
+        transform:
+            translate(-50%, -42%)
+            scale(0.82);
+    }
+
+    .mensaje-inicial h1 {
+        padding: 0 25px;
+    }
+
+}
