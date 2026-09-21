@@ -9,38 +9,60 @@ const petalosCaidos = document.getElementById("petalos-caidos");
 let activado = false;
 
 
-pantalla.addEventListener("click", () => {
+/* =====================================
+   INTERACCIÓN PRINCIPAL
+===================================== */
 
-    if (activado) return;
+pantalla.addEventListener("click", iniciarSorpresa);
+
+
+function iniciarSorpresa() {
+
+    // Evitamos que la animación pueda iniciarse
+    // varias veces.
+
+    if (activado) {
+        return;
+    }
 
     activado = true;
 
 
-    // Desaparece el primer mensaje
+    /* =================================
+       1. DESAPARECE EL PRIMER MENSAJE
+    ================================= */
 
     inicio.classList.add("ocultar");
 
 
-    // Aparece "Un pequeño gesto..."
+    /* =================================
+       2. APARECE:
+          "Un pequeño gesto..."
+    ================================= */
 
     setTimeout(() => {
 
         segundo.classList.add("mostrar");
 
-    }, 800);
+    }, 900);
 
 
-    // Desaparece el segundo mensaje
+    /* =================================
+       3. DESAPARECE EL SEGUNDO MENSAJE
+    ================================= */
 
     setTimeout(() => {
 
         segundo.classList.remove("mostrar");
+
         segundo.classList.add("ocultar");
 
-    }, 2500);
+    }, 2700);
 
 
-    // Aparece el ramito
+    /* =================================
+       4. APARECE EL RAMITO
+    ================================= */
 
     setTimeout(() => {
 
@@ -48,38 +70,86 @@ pantalla.addEventListener("click", () => {
 
         crearPetalos();
 
-    }, 2700);
+    }, 3000);
 
 
-    // Mensaje final
+    /* =================================
+       5. APARECE EL MENSAJE FINAL
+    ================================= */
 
     setTimeout(() => {
 
         mensajeFinal.classList.add("mostrar");
 
-    }, 5100);
+    }, 5700);
 
-});
+}
 
+
+/* =====================================
+   PÉTALOS QUE CAEN
+===================================== */
 
 function crearPetalos() {
 
-    for (let i = 0; i < 12; i++) {
+    // Creamos pocos pétalos para que
+    // el efecto sea sutil.
 
-        const petalo = document.createElement("span");
+    for (let i = 0; i < 10; i++) {
 
-        petalo.className = "petalo-caido";
+        const petalo =
+            document.createElement("span");
+
+
+        petalo.className =
+            "petalo-caido";
+
+
+        /*
+         * Los hacemos caer principalmente
+         * alrededor del ramito.
+         */
 
         petalo.style.left =
             (35 + Math.random() * 30) + "%";
 
+
+        /*
+         * Cada pétalo empieza
+         * en un momento diferente.
+         */
+
         petalo.style.animationDelay =
-            (Math.random() * 2) + "s";
+            (Math.random() * 2.5) + "s";
+
+
+        /*
+         * Velocidad ligeramente diferente.
+         */
 
         petalo.style.animationDuration =
-            (4 + Math.random() * 2) + "s";
+            (4.5 + Math.random() * 2) + "s";
+
 
         petalosCaidos.appendChild(petalo);
+
     }
 
 }
+
+
+/* =====================================
+   EVITAR SCROLL EN CELULAR
+===================================== */
+
+document.addEventListener(
+    "touchmove",
+    (event) => {
+
+        event.preventDefault();
+
+    },
+    {
+        passive: false
+    }
+);
