@@ -15,23 +15,23 @@ body {
 
     font-family: Georgia, "Times New Roman", serif;
 
-    color: #fff;
+    color: #ffffff;
 
     background:
         radial-gradient(
             circle at 50% 42%,
             #30291e 0%,
-            #18140f 55%,
-            #0b0a08 100%
+            #18140f 58%,
+            #090807 100%
         );
 
     user-select: none;
 }
 
 
-/* =====================================
+/* ==================================================
    PANTALLA
-===================================== */
+================================================== */
 
 #pantalla {
     width: 100%;
@@ -49,40 +49,52 @@ body {
 }
 
 
-/* =====================================
+/* ==================================================
    ESCENAS
-===================================== */
+================================================== */
 
 .escena {
     position: absolute;
 
-    width: 100%;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     text-align: center;
 
-    transition:
-        opacity 1.1s ease,
-        transform 1.1s ease;
-
-    z-index: 20;
+    pointer-events: none;
 }
 
 
-/* =====================================
+/* ==================================================
    PRIMER MENSAJE
-===================================== */
+================================================== */
 
-.texto-inicial {
-    transform: translateY(0);
+.escena-inicial {
+    z-index: 20;
+
+    opacity: 1;
 
     transition:
-        opacity 1.1s ease,
-        transform 1.1s ease;
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+
+.texto-inicial {
+    width: 100%;
+
+    padding: 20px;
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
 }
 
 
 .texto-inicial h1 {
-
     font-size: clamp(
         30px,
         7vw,
@@ -91,14 +103,13 @@ body {
 
     font-weight: normal;
 
-    letter-spacing: .5px;
+    letter-spacing: .3px;
 
     margin-bottom: 20px;
 }
 
 
 .texto-inicial p {
-
     font-family: Arial, sans-serif;
 
     font-size: 14px;
@@ -108,7 +119,7 @@ body {
     opacity: .55;
 
     animation:
-        respirar 2.2s infinite;
+        respirar 2.3s infinite;
 }
 
 
@@ -125,22 +136,25 @@ body {
 }
 
 
-/* =====================================
+/* ==================================================
    SEGUNDO MENSAJE
-===================================== */
+================================================== */
 
 .escena-segunda {
+    z-index: 18;
 
     opacity: 0;
 
-    transform: translateY(20px);
+    transform:
+        translateY(18px);
 
-    pointer-events: none;
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
 }
 
 
 .escena-segunda h2 {
-
     font-size: clamp(
         28px,
         7vw,
@@ -155,33 +169,31 @@ body {
 }
 
 
-/* =====================================
-   CLASES DE ANIMACIÓN
-===================================== */
-
-.mostrar {
-    opacity: 1 !important;
-
-    transform:
-        translateY(0)
-        !important;
-}
-
+/* ==================================================
+   ESTADOS DE LOS MENSAJES
+================================================== */
 
 .ocultar {
     opacity: 0 !important;
 
     transform:
-        translateY(-20px)
-        !important;
+        translateY(-18px) !important;
 
-    pointer-events: none;
+    pointer-events: none !important;
 }
 
 
-/* =====================================
+.mostrar {
+    opacity: 1 !important;
+
+    transform:
+        translateY(0) !important;
+}
+
+
+/* ==================================================
    RAMITO
-===================================== */
+================================================== */
 
 .ramito {
 
@@ -194,26 +206,21 @@ body {
 
     height: min(
         520px,
-        70vh
+        72vh
     );
 
     left: 50%;
     top: 50%;
 
     transform:
-        translate(-50%, -46%)
-        scale(.8);
+        translate(-50%, -47%);
 
     opacity: 0;
 
+    visibility: hidden;
+
     transition:
-        opacity 1.5s ease,
-        transform 1.8s cubic-bezier(
-            .17,
-            .67,
-            .25,
-            1.2
-        );
+        opacity 1.2s ease;
 
     z-index: 5;
 
@@ -225,28 +232,31 @@ body {
 
     opacity: 1;
 
-    transform:
-        translate(-50%, -46%)
-        scale(1);
+    visibility: visible;
 }
 
 
-/* =====================================
+/* ==================================================
    SVG
-===================================== */
+================================================== */
 
 .dibujo-ramito {
 
+    position: absolute;
+
     width: 100%;
     height: 100%;
+
+    left: 0;
+    top: 0;
 
     overflow: visible;
 }
 
 
-/* =====================================
-   LUZ DEL RAMITO
-===================================== */
+/* ==================================================
+   LUZ
+================================================== */
 
 .ramito-brillo {
 
@@ -256,7 +266,7 @@ body {
     height: 260px;
 
     left: 50%;
-    top: 120px;
+    top: 100px;
 
     transform:
         translateX(-50%);
@@ -266,211 +276,157 @@ body {
     background:
         radial-gradient(
             circle,
-            rgba(
-                255,
-                214,
-                75,
-                .10
-            ),
+            rgba(255, 215, 70, .10),
             transparent 70%
         );
 
-    filter: blur(14px);
+    filter: blur(15px);
 
     opacity: 0;
 
     transition:
-        opacity 2s ease 1s;
+        opacity 2s ease;
 
     pointer-events: none;
 }
 
 
-.ramito.mostrar
-.ramito-brillo {
-
+.ramito.mostrar .ramito-brillo {
     opacity: 1;
 }
 
 
-/* =====================================
+/* ==================================================
    TALLOS
-===================================== */
+================================================== */
 
 .tallos .tallo {
 
     fill: none;
 
-    stroke:
-        #3f7137;
+    stroke: #416f36;
 
-    stroke-width:
-        7;
+    stroke-width: 7;
 
-    stroke-linecap:
-        round;
+    stroke-linecap: round;
 
-    stroke-dasharray:
-        400;
+    stroke-dasharray: 400;
 
-    stroke-dashoffset:
-        400;
+    stroke-dashoffset: 400;
+
+    opacity: 0;
 
     transition:
-        stroke-dashoffset
-        1.7s ease
-        .5s;
+        stroke-dashoffset 1.5s ease .3s,
+        opacity .5s ease .3s;
 }
 
 
-.ramito.mostrar
-.tallos .tallo {
+.ramito.mostrar .tallos .tallo {
 
-    stroke-dashoffset:
-        0;
+    opacity: 1;
+
+    stroke-dashoffset: 0;
 }
 
 
-/* =====================================
+/* ==================================================
    HOJAS
-===================================== */
+================================================== */
 
 .hojas .hoja {
 
-    fill:
-        #47743a;
+    fill: #4d783d;
 
     opacity: 0;
 
-    transform-box:
-        fill-box;
+    transform-box: fill-box;
 
-    transform-origin:
-        center;
-
-    transform:
-        scale(.3);
+    transform-origin: center;
 
     transition:
-        opacity .9s ease 1.4s,
-        transform 1s ease 1.4s;
+        opacity .8s ease 1.1s;
 }
 
 
-.ramito.mostrar
-.hojas .hoja {
-
+.ramito.mostrar .hojas .hoja {
     opacity: 1;
-
-    transform:
-        scale(1);
 }
 
 
-/* =====================================
+/* ==================================================
    GIRASOLES
-===================================== */
+================================================== */
+
+/*
+   IMPORTANTE:
+   No usamos transform en los grupos completos.
+   El SVG ya tiene las posiciones definidas
+   mediante translate().
+*/
 
 .girasol {
-
-    transform-box:
-        fill-box;
-
-    transform-origin:
-        center;
 
     opacity: 0;
 
-    transform:
-        scale(.15);
+    transform-origin: center;
 
     transition:
-        opacity 1s ease,
-        transform 1.2s cubic-bezier(
-            .17,
-            .67,
-            .3,
-            1.3
-        );
+        opacity 1s ease;
 }
 
 
-.ramito.mostrar
-.girasol {
-
-    opacity: 1;
-
-    transform:
-        scale(1);
-}
-
+/* Cada flor aparece en un momento diferente */
 
 .girasol-izquierdo {
-
-    transition-delay:
-        .9s;
+    transition-delay: .8s;
 }
-
 
 .girasol-centro {
-
-    transition-delay:
-        .65s;
+    transition-delay: .55s;
 }
-
 
 .girasol-derecho {
-
-    transition-delay:
-        1.1s;
+    transition-delay: 1s;
 }
 
 
-/* =====================================
+.ramito.mostrar .girasol {
+    opacity: 1;
+}
+
+
+/* ==================================================
    PÉTALOS
-===================================== */
+================================================== */
 
 .petalos ellipse {
 
-    fill:
-        #f6c52f;
+    fill: #f6c72f;
 
-    stroke:
-        #e9b621;
+    stroke: #e6b21e;
 
-    stroke-width:
-        1;
-
-    transform-box:
-        fill-box;
-
-    transform-origin:
-        center;
+    stroke-width: 1;
 
     filter:
         drop-shadow(
             0 2px 2px
-            rgba(
-                0,
-                0,
-                0,
-                .18
-            )
+            rgba(0, 0, 0, .18)
         );
 }
 
 
-/* =====================================
+/* ==================================================
    CENTRO DE LOS GIRASOLES
-===================================== */
+================================================== */
 
 .centro {
 
     fill:
-        #5a3211;
+        #57300e;
 
     stroke:
-        #3b200b;
+        #38200a;
 
     stroke-width:
         2;
@@ -478,87 +434,42 @@ body {
     filter:
         drop-shadow(
             0 2px 3px
-            rgba(
-                0,
-                0,
-                0,
-                .35
-            )
+            rgba(0, 0, 0, .3)
         );
 }
 
 
-/* pequeños detalles del centro */
-
-.girasol-centro .centro {
-
-    fill:
-        #4e2b0d;
-}
-
-
-/* =====================================
+/* ==================================================
    ENVOLTORIO
-===================================== */
+================================================== */
 
 .envoltorio {
 
     fill:
-        #c7a76d;
+        #c5a66c;
 
     opacity: 0;
 
-    transform-box:
-        fill-box;
-
-    transform-origin:
-        center top;
-
-    transform:
-        translateY(25px);
-
     transition:
-        opacity 1s ease 2s,
-        transform 1s ease 2s;
-
-    filter:
-        drop-shadow(
-            0 5px 8px
-            rgba(
-                0,
-                0,
-                0,
-                .2
-            )
-        );
+        opacity 1s ease 1.7s;
 }
 
 
-.ramito.mostrar
-.envoltorio {
-
+.ramito.mostrar .envoltorio {
     opacity: 1;
-
-    transform:
-        translateY(0);
 }
 
 
-/* =====================================
+/* ==================================================
    DOBLEZ DEL PAPEL
-===================================== */
+================================================== */
 
 .doblez {
 
     fill: none;
 
     stroke:
-        rgba(
-            119,
-            88,
-            42,
-            .35
-        );
+        rgba(100, 72, 32, .35);
 
     stroke-width:
         2;
@@ -566,27 +477,25 @@ body {
     opacity: 0;
 
     transition:
-        opacity 1s ease 2.1s;
+        opacity .8s ease 1.9s;
 }
 
 
-.ramito.mostrar
-.doblez {
-
+.ramito.mostrar .doblez {
     opacity: 1;
 }
 
 
-/* =====================================
+/* ==================================================
    CINTA
-===================================== */
+================================================== */
 
 .cinta {
 
     fill: none;
 
     stroke:
-        #d7aa32;
+        #d6a82f;
 
     stroke-width:
         7;
@@ -599,34 +508,19 @@ body {
 
     opacity: 0;
 
-    transform-box:
-        fill-box;
-
-    transform-origin:
-        center;
-
-    transform:
-        scale(.5);
-
     transition:
-        opacity .8s ease 2.3s,
-        transform .8s ease 2.3s;
+        opacity .8s ease 2s;
 }
 
 
-.ramito.mostrar
-.cinta {
-
+.ramito.mostrar .cinta {
     opacity: 1;
-
-    transform:
-        scale(1);
 }
 
 
-/* =====================================
+/* ==================================================
    MENSAJE FINAL
-===================================== */
+================================================== */
 
 .mensaje-final {
 
@@ -640,16 +534,16 @@ body {
 
     text-align: center;
 
+    z-index: 30;
+
     opacity: 0;
 
     transform:
         translateY(20px);
 
     transition:
-        opacity 1.4s ease,
-        transform 1.4s ease;
-
-    z-index: 30;
+        opacity 1.3s ease,
+        transform 1.3s ease;
 
     pointer-events: none;
 }
@@ -675,7 +569,7 @@ body {
     font-weight: normal;
 
     color:
-        #ffe89a;
+        #ffe99a;
 
     text-shadow:
         0 0 18px
@@ -683,7 +577,7 @@ body {
             255,
             214,
             76,
-            .25
+            .22
         );
 }
 
@@ -702,9 +596,9 @@ body {
 }
 
 
-/* =====================================
+/* ==================================================
    PÉTALOS QUE CAEN
-===================================== */
+================================================== */
 
 #petalos-caidos {
 
@@ -712,9 +606,9 @@ body {
 
     inset: 0;
 
-    pointer-events: none;
-
     overflow: hidden;
+
+    pointer-events: none;
 
     z-index: 15;
 }
@@ -769,9 +663,9 @@ body {
 }
 
 
-/* =====================================
+/* ==================================================
    CELULAR
-===================================== */
+================================================== */
 
 @media (max-width: 600px) {
 
@@ -782,16 +676,9 @@ body {
         height: 470px;
 
         transform:
-            translate(-50%, -44%)
-            scale(.82);
+            translate(-50%, -46%);
     }
 
-    .ramito.mostrar {
-
-        transform:
-            translate(-50%, -44%)
-            scale(.82);
-    }
 
     .texto-inicial h1 {
 
@@ -801,6 +688,7 @@ body {
         line-height:
             1.2;
     }
+
 
     .mensaje-final {
 
