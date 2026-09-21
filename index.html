@@ -1,336 +1,166 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Una pequeña sorpresa 🌼</title>
+    <title>Un pequeño gesto</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            min-height: 100vh;
-            overflow: hidden;
-            font-family: Georgia, serif;
-            background: radial-gradient(circle at center, #252018 0%, #0d0c0a 70%);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .contenedor {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .mensaje-inicial {
-            position: absolute;
-            top: 22%;
-            transition: opacity 1s ease;
-            z-index: 10;
-        }
-
-        .mensaje-inicial h1 {
-            font-size: clamp(28px, 7vw, 50px);
-            font-weight: normal;
-            margin-bottom: 18px;
-        }
-
-        .mensaje-inicial p {
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            opacity: 0.75;
-            animation: pulsar 2s infinite;
-        }
-
-        @keyframes pulsar {
-            0%, 100% {
-                opacity: 0.45;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
-
-        /* FLORES */
-
-        .flor {
-            position: relative;
-            width: 260px;
-            height: 380px;
-            transform: scale(0);
-            transition: transform 2s cubic-bezier(.17,.67,.3,1.3);
-        }
-
-        .flor.mostrar {
-            transform: scale(1);
-        }
-
-        /* TALLO */
-
-        .tallo {
-            position: absolute;
-            width: 12px;
-            height: 230px;
-            background: linear-gradient(to right, #254c25, #4d8537, #254c25);
-            bottom: 20px;
-            left: 124px;
-            border-radius: 10px;
-            transform-origin: bottom;
-            transform: scaleY(0);
-            transition: transform 1.5s ease 0.3s;
-        }
-
-        .flor.mostrar .tallo {
-            transform: scaleY(1);
-        }
-
-        /* HOJAS */
-
-        .hoja {
-            position: absolute;
-            width: 85px;
-            height: 38px;
-            background: linear-gradient(135deg, #315f2c, #6e9f45);
-            border-radius: 100% 0 100% 0;
-            opacity: 0;
-        }
-
-        .hoja.izquierda {
-            left: 45px;
-            bottom: 100px;
-            transform: rotate(-25deg) scale(0);
-            transform-origin: right center;
-        }
-
-        .hoja.derecha {
-            right: 45px;
-            bottom: 155px;
-            transform: rotate(25deg) scale(0);
-            transform-origin: left center;
-        }
-
-        .flor.mostrar .hoja {
-            opacity: 1;
-            transform: rotate(0) scale(1);
-            transition: all 1s ease 1.5s;
-        }
-
-        /* CABEZA DE LA FLOR */
-
-        .cabeza {
-            position: absolute;
-            width: 190px;
-            height: 190px;
-            top: 20px;
-            left: 35px;
-            transform: scale(0);
-            transition: transform 1.5s ease 1.3s;
-        }
-
-        .flor.mostrar .cabeza {
-            transform: scale(1);
-        }
-
-        .petalo {
-            position: absolute;
-            width: 72px;
-            height: 105px;
-            background: linear-gradient(to bottom, #fff36a, #f7c928);
-            border-radius: 50% 50% 45% 45%;
-            left: 59px;
-            top: 42px;
-            transform-origin: 50% 53px;
-            box-shadow: 0 0 15px rgba(255, 215, 50, 0.35);
-        }
-
-        .p1 { transform: rotate(0deg) translateY(-45px); }
-        .p2 { transform: rotate(45deg) translateY(-45px); }
-        .p3 { transform: rotate(90deg) translateY(-45px); }
-        .p4 { transform: rotate(135deg) translateY(-45px); }
-        .p5 { transform: rotate(180deg) translateY(-45px); }
-        .p6 { transform: rotate(225deg) translateY(-45px); }
-        .p7 { transform: rotate(270deg) translateY(-45px); }
-        .p8 { transform: rotate(315deg) translateY(-45px); }
-
-        .centro {
-            position: absolute;
-            width: 68px;
-            height: 68px;
-            background: radial-gradient(circle, #8a5014, #4b2b0c);
-            border-radius: 50%;
-            left: 61px;
-            top: 61px;
-            z-index: 5;
-            box-shadow:
-                0 0 15px rgba(255, 205, 50, 0.6),
-                0 0 35px rgba(255, 205, 50, 0.25);
-        }
-
-        /* BRILLOS */
-
-        .brillo {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: #fff8b0;
-            border-radius: 50%;
-            opacity: 0;
-        }
-
-        .flor.mostrar ~ .brillos .brillo {
-            animation: aparecerBrillo 2s ease forwards;
-        }
-
-        .b1 { left: 15%; top: 30%; animation-delay: 2s !important; }
-        .b2 { left: 80%; top: 35%; animation-delay: 2.5s !important; }
-        .b3 { left: 22%; top: 55%; animation-delay: 3s !important; }
-        .b4 { left: 75%; top: 60%; animation-delay: 3.5s !important; }
-        .b5 { left: 50%; top: 20%; animation-delay: 4s !important; }
-
-        @keyframes aparecerBrillo {
-            0% {
-                opacity: 0;
-                transform: scale(0);
-            }
-
-            50% {
-                opacity: 1;
-                transform: scale(1.8);
-            }
-
-            100% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-        }
-
-        /* MENSAJE FINAL */
-
-        .mensaje-final {
-            position: absolute;
-            bottom: 7%;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1.5s ease;
-            font-size: clamp(20px, 5vw, 32px);
-            color: #fff4a8;
-            text-shadow: 0 0 15px rgba(255, 220, 70, 0.5);
-        }
-
-        .mensaje-final.mostrar {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .oculto {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        @media (max-width: 500px) {
-            .flor {
-                transform: scale(0);
-            }
-
-            .flor.mostrar {
-                transform: scale(0.85);
-            }
-
-            .mensaje-inicial {
-                top: 18%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="contenedor" id="pantalla">
+    <main id="pantalla">
 
-        <div class="mensaje-inicial" id="inicio">
+        <!-- PRIMER MENSAJE -->
+
+        <section id="inicio" class="pantalla mensaje-inicial">
+
             <h1>Tengo algo para vos...</h1>
-            <p>🌱 Tocá la pantalla</p>
-        </div>
 
-        <div class="flor" id="flor">
+            <p>Tocá la pantalla</p>
 
-            <div class="tallo"></div>
+        </section>
 
-            <div class="hoja izquierda"></div>
-            <div class="hoja derecha"></div>
 
-            <div class="cabeza">
+        <!-- SEGUNDO MENSAJE -->
 
-                <div class="petalo p1"></div>
-                <div class="petalo p2"></div>
-                <div class="petalo p3"></div>
-                <div class="petalo p4"></div>
-                <div class="petalo p5"></div>
-                <div class="petalo p6"></div>
-                <div class="petalo p7"></div>
-                <div class="petalo p8"></div>
+        <section id="segundo" class="pantalla mensaje-segundo">
 
-                <div class="centro"></div>
+            <h2>Un pequeño gesto...</h2>
+
+        </section>
+
+
+        <!-- RAMITO -->
+
+        <section id="ramito" class="ramito">
+
+            <div class="flores">
+
+                <!-- Girasol izquierdo -->
+
+                <div class="girasol flor-izquierda">
+
+                    <div class="petalos">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div class="centro-flor"></div>
+
+                </div>
+
+
+                <!-- Girasol central -->
+
+                <div class="girasol flor-centro">
+
+                    <div class="petalos">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div class="centro-flor"></div>
+
+                </div>
+
+
+                <!-- Girasol derecho -->
+
+                <div class="girasol flor-derecha">
+
+                    <div class="petalos">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div class="centro-flor"></div>
+
+                </div>
 
             </div>
-        </div>
 
-        <div class="brillos">
-            <div class="brillo b1"></div>
-            <div class="brillo b2"></div>
-            <div class="brillo b3"></div>
-            <div class="brillo b4"></div>
-            <div class="brillo b5"></div>
-        </div>
 
-        <div class="mensaje-final" id="final">
-            Una flor amarilla para vos 💛
-        </div>
+            <!-- TALLOS -->
 
-    </div>
+            <div class="tallo tallo-izquierdo"></div>
 
-    <script>
+            <div class="tallo tallo-centro"></div>
 
-        const pantalla = document.getElementById("pantalla");
-        const flor = document.getElementById("flor");
-        const inicio = document.getElementById("inicio");
-        const mensajeFinal = document.getElementById("final");
+            <div class="tallo tallo-derecho"></div>
 
-        let activado = false;
 
-        pantalla.addEventListener("click", () => {
+            <!-- HOJAS -->
 
-            if (activado) return;
+            <div class="hoja hoja-izquierda"></div>
 
-            activado = true;
+            <div class="hoja hoja-centro"></div>
 
-            inicio.classList.add("oculto");
+            <div class="hoja hoja-derecha"></div>
 
-            setTimeout(() => {
-                flor.classList.add("mostrar");
-            }, 500);
 
-            setTimeout(() => {
-                mensajeFinal.classList.add("mostrar");
-            }, 3500);
+            <!-- ENVOLTORIO -->
 
-        });
+            <div class="envoltorio"></div>
 
-    </script>
+            <div class="cinta"></div>
+
+        </section>
+
+
+        <!-- MENSAJE FINAL -->
+
+        <section id="final" class="mensaje-final">
+
+            <h2>Para vos 💛</h2>
+
+            <p>Espero que te saque una sonrisa.</p>
+
+        </section>
+
+
+        <!-- PÉTALOS QUE CAEN -->
+
+        <div id="petalos-caidos"></div>
+
+    </main>
+
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
